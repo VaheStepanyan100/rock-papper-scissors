@@ -40,6 +40,23 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
+function checkWinner(playerSelection, computerSelection) {
+  if (playerSelection.toLowerCase() === computerSelection.toLowerCase()) {
+    return "Draw";
+  } else if (
+    (playerSelection.toLowerCase() === "rock" &&
+      computerSelection.toLowerCase() === "scissors") ||
+    (playerSelection.toLowerCase() === "scissors" &&
+      computerSelection.toLowerCase() === "paper") ||
+    (playerSelection.toLowerCase() === "paper" &&
+      computerSelection.toLowerCase() === "rock")
+  ) {
+    return "Player";
+  } else {
+    return "Computer";
+  }
+}
+
 function game() {
   for (let i = 0; i < 5; i++) {
     const playerSelection = prompt("Type Rock Paper or Scissors!");
