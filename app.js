@@ -58,10 +58,25 @@ function checkWinner(playerSelection, computerSelection) {
 }
 
 function game() {
+  let playerScore = 0;
+  let computerScore = 0;
   for (let i = 0; i < 5; i++) {
     const playerSelection = prompt("Type Rock Paper or Scissors!");
     const computerSelection = getComputerChoice();
     console.log(playRound(playerSelection, computerSelection));
+    console.log("-----------");
+    if (checkWinner(playerSelection, computerSelection) === "Player") {
+      playerScore++;
+    } else if (checkWinner(playerSelection, computerSelection) === "Computer") {
+      computerScore++;
+    }
+  }
+  if (playerScore > computerScore) {
+    console.log("You Win!");
+  } else if (playerScore < computerScore) {
+    console.log("You Lose!");
+  } else {
+    console.log("!Draw");
   }
 }
 
