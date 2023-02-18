@@ -39,3 +39,13 @@ function playRound(playerSelection, computerSelection) {
     return `You Win! Scissors beats Paper`;
   }
 }
+
+function game() {
+  for (let i = 0; i < 5; i++) {
+    const playerSelection = prompt("Type Rock Paper or Scissors!");
+    const computerSelection = getComputerChoice();
+    console.log(playRound(playerSelection, computerSelection));
+  }
+}
+
+game();
