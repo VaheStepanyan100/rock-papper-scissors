@@ -60,24 +60,63 @@ function checkWinner(playerSelection, computerSelection) {
 function game() {
   let playerScore = 0;
   let computerScore = 0;
-  for (let i = 0; i < 5; i++) {
-    const playerSelection = prompt("Type Rock Paper or Scissors!");
+  let Draw = 0;
+
+  const rockBtn = document.createElement("button");
+  const paperBtn = document.createElement("button");
+  const scissorsBtn = document.createElement("button");
+
+  rockBtn.textContent = "Rock";
+  paperBtn.textContent = "Paper";
+  scissorsBtn.textContent = "Scissors";
+
+  document.body.appendChild(rockBtn);
+  document.body.appendChild(paperBtn);
+  document.body.appendChild(scissorsBtn);
+
+  const div = document.createElement("div");
+  document.body.appendChild(div);
+
+  const p = document.createElement("p");
+  p.style.fontWeight = "bold";
+  p.style.fontSize = "25px";
+  document.body.appendChild(p);
+
+  function handler(shape) {
+    if (playerScore === 0 && computerScore === 0 && Draw === 0) {
+      div.innerText = "";
+    }
+
     const computerSelection = getComputerChoice();
-    console.log(playRound(playerSelection, computerSelection));
-    console.log("-----------");
+    const playerSelection = shape;
+    div.innerText += playRound(playerSelection, computerSelection) + "\n";
     if (checkWinner(playerSelection, computerSelection) === "Player") {
       playerScore++;
     } else if (checkWinner(playerSelection, computerSelection) === "Computer") {
       computerScore++;
+    } else if (checkWinner(playerSelection, computerSelection) === "Draw") {
+      Draw++;
+    }
+
+    if (playerScore !== 5 && computerScore !== 5) {
+      p.innerText = "";
+    }
+    if (playerScore === 5) {
+      p.innerText = "You Win!";
+      computerScore = 0;
+      playerScore = 0;
+      Draw = 0;
+    } else if (computerScore === 5) {
+      p.innerText = "You Lose!";
+      computerScore = 0;
+      playerScore = 0;
+      Draw = 0;
     }
   }
-  if (playerScore > computerScore) {
-    console.log("You Win!");
-  } else if (playerScore < computerScore) {
-    console.log("You Lose!");
-  } else {
-    console.log("!Draw");
-  }
+
+  rockBtn.addEventListener("click", () => handler("Rock"));
+  paperBtn.addEventListener("click", () => handler("Paper"));
+  scissorsBtn.addEventListener("click", () => handler("Scissors"));
 }
 
 game();
